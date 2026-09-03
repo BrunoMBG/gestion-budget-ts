@@ -7,7 +7,32 @@
     <title>Mon budget</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <!-- ---------------------- Header ---------------------- -->
+      <header class="header">
+        <h1 class="header__titre">Mon budget</h1>
+      </header>
+    </div>
+    <!-- ---------------------- Main ---------------------- -->
+    <main>
+      <!-- ---------------------- Section solde ---------------------- -->
+      <section class="resume" aria-label="Résumé du budget">
+        <p class="resume__libelle">Solde total</p>
+        <p class="resume__total" id="soldeTotal">1 363,60 €</p>
+        <div class="resume__blocs">
+          <!-- Revenus -->
+          <article class="resume__bloc resume__bloc--revenu">
+            <p class="resume__bloc-titre">Revenus</p>
+            <p class="resume__bloc-montant" id="totalRevenus">+ 2 200,00 €</p>
+          </article>
+          <!-- Dépenses -->
+          <article class="resume__bloc resume__bloc--depense">
+            <p class="resume__bloc-titre">Dépenses</p>
+            <p class="resume__bloc-montant" id="totalDepenses">- 836,40 €</p>
+          </article>
+        </div>
+      </section>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
