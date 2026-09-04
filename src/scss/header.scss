@@ -1,7 +1,7 @@
 @use 'variables' as *;
 
 .header {
-  padding: 1.25rem 1rem;
+  padding: 1.25rem 0;
   background-color: $couleur-fond-bloc;
   border-bottom: 1px solid $couleur-bordure;
 
@@ -11,5 +11,9 @@
     font-weight: 700;
     color: $couleur-texte-principal;
     text-align: center;
+
+    @media (min-width: 768px) {
+      text-align: left;
+    }
   }
 }
