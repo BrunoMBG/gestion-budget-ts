@@ -32,6 +32,77 @@
           </article>
         </div>
       </section>
+      <!-- ---------------------- Filtres ---------------------- -->
+      <section class="filtres" aria-label="Filtres des transactions">
+        <!-- Filtre par type -->
+        <div class="filtres__groupe" role="group" aria-label="Filtrer par type">
+          <button
+            type="button"
+            id="filtreTypeTous"
+            class="filtres__bouton filtres__bouton--actif"
+            data-type="tous"
+          >
+            Tous
+          </button>
+          <button
+            type="button"
+            id="filtreTypeRevenus"
+            class="filtres__bouton"
+            data-type="revenu"
+          >
+            Revenus
+          </button>
+          <button
+            type="button"
+            id="filtreTypeDepenses"
+            class="filtres__bouton"
+            data-type="depense"
+          >
+            Dépenses
+          </button>
+        </div>
+
+        <!-- Filtre par catégorie -->
+        <div
+          class="filtres__groupe"
+          id="conteneurFiltresCategories"
+          role="group"
+          aria-label="Filtrer par catégorie"
+        >
+          <button
+            type="button"
+            id="filtreCatToutes"
+            class="filtres__bouton filtres__bouton--actif"
+            data-categorie="toutes"
+          >
+            Toutes catégories
+          </button>
+          <button
+            type="button"
+            id="filtreCatAlimentation"
+            class="filtres__bouton"
+            data-categorie="alimentation"
+          >
+            Alimentation
+          </button>
+          <button
+            type="button"
+            id="filtreCatLoyer"
+            class="filtres__bouton"
+            data-categorie="loyer"
+          >
+            Loyer
+          </button>
+          <button
+            type="button"
+            id="filtreCatLoisirs"
+            class="filtres__bouton"
+            data-categorie="loisirs"
+          >
+            Loisirs
+          </button>
+        </div>
+      </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

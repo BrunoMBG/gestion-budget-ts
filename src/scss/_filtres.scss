@@ -1,0 +1,43 @@
+@use 'variables' as *;
+
+.filtres {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+
+  &__groupe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__bouton {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+    background-color: $couleur-fond-bloc;
+    color: $couleur-texte-secondaire;
+    border: 1px solid $couleur-bordure;
+
+    &:hover {
+      border-color: $couleur-texte-principal;
+      color: $couleur-texte-principal;
+    }
+
+    &--actif {
+      background-color: $couleur-texte-principal;
+      color: $couleur-fond-bloc;
+      border-color: $couleur-texte-principal;
+
+      &:hover {
+        background-color: $couleur-texte-principal;
+        color: $couleur-fond-bloc;
+      }
+    }
+  }
+}
