@@ -106,7 +106,6 @@
 
       <!-- ---------------------- Transactions ---------------------- -->
       <section class="transactions" aria-label="Liste des transactions">
-      
         <div class="transactions__tri">
           <label for="triTransactions" class="transactions__label"
             >Trier par</label
@@ -146,6 +145,81 @@
           </li>
         </ul>
       </section>
+
+      <!-- ---------------------- Formulaire ---------------------- -->
+      <form
+        id="formTransaction"
+        class="form-transaction"
+        aria-label="Ajouter une transaction"
+      >
+        <h2 class="form-transaction__titre">Nouvelle transaction</h2>
+
+        <!-- Titre -->
+        <div class="form-transaction__champ">
+          <label for="titre" class="form-transaction__label">Titre</label>
+          <input
+            type="text"
+            id="titre"
+            class="form-transaction__input"
+            placeholder="Ex. Courses de la semaine"
+            required
+          />
+        </div>
+
+        <!-- Montant -->
+        <div class="form-transaction__champ">
+          <label for="montant" class="form-transaction__label"
+            >Montant (€)</label
+          >
+          <input
+            type="number"
+            id="montant"
+            class="form-transaction__input"
+            placeholder="0,00"
+            step="0.01"
+            min="0.01"
+            required
+          />
+        </div>
+
+        <div class="form-transaction__bloc">
+          <div class="form-transaction__champ">
+            <label for="type" class="form-transaction__label">Type</label>
+            <select id="type" class="form-transaction__select" required>
+              <option value="revenu">Revenu</option>
+              <option value="depense">Dépense</option>
+            </select>
+          </div>
+
+          <div class="form-transaction__champ">
+            <label for="categorie" class="form-transaction__label"
+              >Catégorie</label
+            >
+            <select id="categorie" class="form-transaction__select" required>
+              <option value="alimentation">Alimentation</option>
+              <option value="loyer">Loyer</option>
+              <option value="loisirs">Loisirs</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Date -->
+        <div class="form-transaction__champ">
+          <label for="date" class="form-transaction__label">Date</label>
+          <input
+            type="date"
+            id="date"
+            class="form-transaction__input"
+            required
+          />
+        </div>
+
+        <!-- Bouton -->
+        <button type="submit" class="form-transaction__bouton">
+          Ajouter la transaction
+        </button>
+      </form>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
