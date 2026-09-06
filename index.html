@@ -103,6 +103,49 @@
           </button>
         </div>
       </section>
+
+      <!-- ---------------------- Transactions ---------------------- -->
+      <section class="transactions" aria-label="Liste des transactions">
+      
+        <div class="transactions__tri">
+          <label for="triTransactions" class="transactions__label"
+            >Trier par</label
+          >
+          <select id="triTransactions" class="transactions__select">
+            <option value="dateDesc">Date (plus récent)</option>
+            <option value="dateAsc">Date (plus ancien)</option>
+            <option value="montantDesc">Montant (décroissant)</option>
+            <option value="montantAsc">Montant (croissant)</option>
+            <option value="titreAsc">Titre (A → Z)</option>
+          </select>
+        </div>
+
+        <ul id="listeTransactions" class="transactions__liste">
+          <li class="transaction transaction--revenu" data-id="1">
+            <div class="transaction__infos">
+              <h3 class="transaction__titre">Salaire de septembre</h3>
+              <div class="transaction__details">
+                <span class="transaction__badge">Loisirs</span>
+                <time datetime="2026-09-03" class="transaction__date"
+                  >3 sept. 2026</time
+                >
+              </div>
+            </div>
+            <div class="transaction__action">
+              <span class="transaction__montant transaction__montant--revenu"
+                >+ 2 200,00 €</span
+              >
+              <button
+                type="button"
+                class="transaction__bouton-supprimer"
+                aria-label="Supprimer la transaction Salaire de septembre"
+              >
+                ✕
+              </button>
+            </div>
+          </li>
+        </ul>
+      </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
