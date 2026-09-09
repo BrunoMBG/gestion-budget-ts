@@ -41,7 +41,8 @@
     border-radius: 0.25rem;
 
     &::placeholder {
-      color: lighten($couleur-texte-secondaire, 20%);
+      color: $couleur-texte-secondaire;
+      
     }
 
     &:focus {
