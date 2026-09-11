@@ -49,9 +49,18 @@ if (form) {
 
     // Récupère la date du jour
     const dateAujourdHui = new Date().toISOString().split("T")[0];
+    // Définit la date minimale à 5 ans avant l'année actuelle
+    const anneeActuelle = new Date().getFullYear();
+    const dateMinimale = `${anneeActuelle - 5}-01-01`;
 
-    if (!dateInput.value || dateInput.value > dateAujourdHui) {
-      alert("La date ne peut pas être dans le futur.");
+    if (
+      !dateInput.value ||
+      dateInput.value > dateAujourdHui ||
+      dateInput.value < dateMinimale
+    ) {
+      alert(
+        "Veuillez choisir une date comprise entre aujourd'hui et il y a 5 ans maximum.",
+      );
       return;
     }
 
@@ -78,7 +87,7 @@ if (form) {
 /**
  * Supprime une transaction du tableau selon son identifiant unique
  * et rafraîchit l'affichage du DOM ainsi que les totaux.
- * 
+ *
  * @param id - Identifiant UUID de la transaction à retirer
  */
 const supprimerTransaction = (id: string): void => {
@@ -97,7 +106,9 @@ if (liste) {
   liste.addEventListener("click", (e: MouseEvent) => {
     const cible = e.target as HTMLElement;
 
-    const btnSupprimer = cible.closest<HTMLButtonElement>(".transaction__bouton-supprimer");
+    const btnSupprimer = cible.closest<HTMLButtonElement>(
+      ".transaction__bouton-supprimer",
+    );
 
     if (btnSupprimer && btnSupprimer.dataset.id) {
       supprimerTransaction(btnSupprimer.dataset.id);
