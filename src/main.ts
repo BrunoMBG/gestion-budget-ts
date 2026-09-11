@@ -1,39 +1,48 @@
 import "./scss/style.scss";
 import type { Transaction } from "./types";
 import { calculer, resultat } from "./dom";
+import { chargerTransactions, sauvegarderTransactions } from "./stockage";
 
-const transactions: Transaction[] = [
-  {
-    id: "1",
-    titre: "Salaire de septembre",
-    montant: 2200,
-    type: "revenu",
-    categorie: "loisirs",
-    date: "2026-09-03",
-  },
-  {
-    id: "2",
-    titre: "Courses alimentaires",
-    montant: 836.4,
-    type: "depense",
-    categorie: "alimentation",
-    date: "2026-09-05",
-  },
-];
-
+const transactions: Transaction[] = chargerTransactions();
 resultat(transactions);
 calculer(transactions);
 
 const form = document.querySelector<HTMLFormElement>("#formTransaction");
 
 if (form) {
+  const typeSelect = document.querySelector<HTMLSelectElement>("#type");
+  const categorieSelect =
+    document.querySelector<HTMLSelectElement>("#categorie");
+
+  /**
+   * Gère l'état dynamique du champ "Catégorie" en fonction du type de transaction sélectionné.
+   * - Si le type est "revenu" : réinitialise la catégorie et désactive le champ.
+   * - Si le type est "dépense" : active le champ
+   */
+  const verifierTypeRevenu = () => {
+    if (typeSelect && categorieSelect) {
+      if (typeSelect.value === "revenu") {
+        categorieSelect.value = "";
+        categorieSelect.disabled = true;
+      } else {
+        categorieSelect.disabled = false;
+        if (!categorieSelect.value) {
+          categorieSelect.value = "alimentation";
+        }
+      }
+    }
+  };
+
+  if (typeSelect && categorieSelect) {
+    verifierTypeRevenu();
+    typeSelect.addEventListener("change", verifierTypeRevenu);
+  }
+
   form.addEventListener("submit", (e: SubmitEvent) => {
     e.preventDefault();
 
     const titreInput = document.querySelector<HTMLInputElement>("#titre");
     const montantInput = document.querySelector<HTMLInputElement>("#montant");
-    const typeSelect = document.querySelector<HTMLSelectElement>("#type");
-    const categorieSelect = document.querySelector<HTMLSelectElement>("#categorie");
     const dateInput = document.querySelector<HTMLInputElement>("#date");
 
     // Arrête l'exécution si l'un des champs est introuvable
@@ -44,6 +53,12 @@ if (form) {
       !categorieSelect ||
       !dateInput
     ) {
+      return;
+    }
+
+    const montant = parseFloat(montantInput.value);
+    if (isNaN(montant) || montant <= 0 || montant > 10000000) {
+      alert("Veuillez entrer un montant valide (entre 0 et 10 000 000 €).");
       return;
     }
 
@@ -67,7 +82,7 @@ if (form) {
     const nouvelleTransaction: Transaction = {
       id: crypto.randomUUID(),
       titre: titreInput.value.trim(),
-      montant: parseFloat(montantInput.value),
+      montant: montant,
       type: typeSelect.value as "revenu" | "depense",
       categorie: categorieSelect.value as Transaction["categorie"],
       date: dateInput.value,
@@ -76,11 +91,15 @@ if (form) {
     // Ajout de la transaction dans le tableau
     transactions.push(nouvelleTransaction);
 
+    // Sauvegarde dans le localStorage
+    sauvegarderTransactions(transactions);
+
     // Rafraîchissement de l'affichage de la liste et des calculs
     resultat(transactions);
     calculer(transactions);
 
     form.reset();
+    verifierTypeRevenu();
   });
 }
 
@@ -95,6 +114,9 @@ const supprimerTransaction = (id: string): void => {
 
   if (index !== -1) {
     transactions.splice(index, 1);
+
+    sauvegarderTransactions(transactions);
+
     resultat(transactions);
     calculer(transactions);
   }
