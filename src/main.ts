@@ -2,10 +2,14 @@ import "./scss/style.scss";
 import type { Transaction } from "./types";
 import { calculer, resultat } from "./dom";
 import { chargerTransactions, sauvegarderTransactions } from "./stockage";
+import {filtresTri} from "./filtres";
+
 
 const transactions: Transaction[] = chargerTransactions();
 resultat(transactions);
 calculer(transactions);
+
+filtresTri(transactions);
 
 const form = document.querySelector<HTMLFormElement>("#formTransaction");
 
